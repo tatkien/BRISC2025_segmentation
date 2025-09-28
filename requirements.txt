@@ -1,0 +1,12 @@
+numpy
+pandas
+torch 
+torchvision
+opencv-python
+matplotlib
+scikit-learn
+tqdm
+Pillow
+torchmetrics[image]
+wandb
+timm
