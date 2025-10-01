@@ -1,0 +1,18 @@
+import torch
+EMBEDDING_DIM = 96
+DEPTHS = [2, 2, 2]
+NUM_HEADS = [3, 6, 12]
+WINDOW_SIZE = 7
+MLP_RATIO = 4.0
+QKV_BIAS = True
+DROP_RATE = 0.0
+ATTN_DROP_RATE = 0.0
+DROP_PATH_RATE = 0.1
+PATCH_SIZE = 4
+INPUT_SIZE = 512
+CHANNELS = 3
+SCALE_FACTOR = 2
+SHIFT_SIZE = WINDOW_SIZE // 2
+NUM_CLASSES = 2
+TOKEN_EMBEDDING_DIM = 512
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
