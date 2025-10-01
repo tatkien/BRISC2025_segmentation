@@ -16,8 +16,3 @@ This dataset was splitted to train and test. (https://www.kaggle.com/datasets/br
 - **Train dataset size**: ~5000 images in train directory.
 - **Test dataset size**: ~1000 images for whole dataset.
 
-## Download dataset
-```bash
-git clone https://github.com/tatkien/BRISC2025_segmentation.git
-python download.py
-```
