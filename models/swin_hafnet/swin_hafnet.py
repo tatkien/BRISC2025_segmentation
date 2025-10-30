@@ -4,12 +4,12 @@ import torch.nn.functional as F
 from torchvision.ops.deform_conv import deform_conv2d
 from timm.models.swin_transformer import SwinTransformerBlock
 from typing import Tuple, Optional
-import math # Import math for trunc_normal_
+import math  # Import math for trunc_normal_
 import scipy.stats as stats
 from timm.layers import DropPath
 from einops import rearrange
 import warnings
-from constants import *
+from .constants import *
 
 def trunc_normal_(tensor, mean=0., std=1., a=-2., b=2.):
   # tensor: A torch.Tensor, typically weights of layer
