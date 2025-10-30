@@ -10,3 +10,7 @@ Pillow
 torchmetrics[image]
 wandb
 timm
+streamlit
+segmentation_models_pytorch
+einops
+streamlit-paste-button
