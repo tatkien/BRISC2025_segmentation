@@ -16,6 +16,7 @@ st.set_page_config(page_title="Brain Tumor Image Segmentation", layout="wide")
 st.title("Brain Tumor Image Segmentation Demo")
 st.markdown("Upload up to 5 images (PNG/JPG) and click `Run` to get segmentation masks.")
 
+st.markdown("Note: In web deployment, no cuda supported")
 # Sidebar controls
 with st.sidebar:
     st.header("Settings")
