@@ -17,13 +17,16 @@ def load_default_images():
     try:
         test_csv_path = os.path.join(os.getcwd(), 'dataset', 'test.csv')
         if os.path.exists(test_csv_path):
+            print("Loading default images from:", test_csv_path)
             df_test = pd.read_csv(test_csv_path)
             # Sample 3 random images
             sampled = df_test.sample(n=min(3, len(df_test)), random_state=None)
             default_images = []
             for _, row in sampled.iterrows():
                 img_path = row['image_path']
+                print(img_path)
                 if os.path.exists(img_path):
+                    print("Found image path")
                     try:
                         img = Image.open(img_path).convert("RGB")
                         # Create a file-like name for display
@@ -53,7 +56,7 @@ st.markdown("### Upload up to 5 images (PNG/JPG/JPEG) (or check `Load 3 sample i
 st.markdown("Note: In web deployment, no cuda supported")
 # Sidebar controls
 with st.sidebar:
-    st.image(os.path.join(os.getcwd(), 'web_based', 'sidebar_icon.png'), use_container_width=True)
+    st.image(os.path.join(os.getcwd(), 'web_based', 'sidebar_icon.png'), width='stretch')
     st.header("Settings")
     model_path = st.selectbox("Model", options=["UNet", "SwinHAFNet"])
     device = st.selectbox("Device", options=["cpu", "cuda"], index=0)
