@@ -48,13 +48,18 @@ if 'last_use_default' not in st.session_state:
 st.title("Brain Tumor Image Segmentation Demo")
 st.markdown("### Upload up to 5 images (PNG/JPG/JPEG) (or check `Load 3 sample images` to use sample images), then click `Run inference` to get segmentation masks.")
 
-st.markdown("Note: In web deployment, no cuda supported")
+st.markdown("#### ****Note: In web deployment, no CUDA is supported***")
 # Sidebar controls
 with st.sidebar:
     st.image(os.path.join(os.getcwd(), 'web_based', 'sidebar_icon.png'), width='stretch')
     st.header("Settings")
     model_path = st.selectbox("Model", options=["UNet", "SwinHAFNet"])
-    device = st.selectbox("Device", options=["cpu", "cuda"], index=0)
+    # Only show device selection if CUDA is available
+    if torch.cuda.is_available():
+        device = st.selectbox("Device", options=["cpu", "cuda"], index=0)
+    else:
+        device = "cpu"
+        st.info("Running on CPU (CUDA is not available).")
     threshold = st.slider("Mask threshold", 0.0, 1.0, 0.5)
     use_default = st.checkbox("Load 3 sample images", value=False)
     run_button = st.button("Run inference")
