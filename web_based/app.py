@@ -13,31 +13,26 @@ from web_based.model_utils import load_model, preprocess_image, predict_masks
 
 
 def load_default_images():
-    """Load 3 random images from test dataset"""
-    try:
-        test_csv_path = os.path.join(os.getcwd(), 'dataset', 'test.csv')
-        if os.path.exists(test_csv_path):
-            print("Loading default images from:", test_csv_path)
-            df_test = pd.read_csv(test_csv_path)
-            # Sample 3 random images
-            sampled = df_test.sample(n=min(3, len(df_test)), random_state=None)
-            default_images = []
-            for _, row in sampled.iterrows():
-                img_path = row['image_path']
-                print(img_path)
-                if os.path.exists(img_path):
-                    print("Found image path")
-                    try:
-                        img = Image.open(img_path).convert("RGB")
-                        # Create a file-like name for display
-                        filename = os.path.basename(img_path)
-                        default_images.append((img, filename))
-                    except Exception as e:
-                        print(f"Could not load {img_path}: {e}")
-            return default_images
-    except Exception as e:
-        print(f"Could not load default images: {e}")
-    return []
+    """Load 3 sample images from web_based/sample_images or test dataset"""
+    default_images = []
+    
+    # First, try to load from web_based/sample_images (for deployment)
+    sample_dir = os.path.join(os.path.dirname(__file__), 'sample_images')
+    if os.path.exists(sample_dir):
+        image_files = [f for f in os.listdir(sample_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+        if image_files:
+            # Randomly select up to 3 images
+            import random
+            selected = random.sample(image_files, min(3, len(image_files)))
+            for filename in selected:
+                img_path = os.path.join(sample_dir, filename)
+                try:
+                    img = Image.open(img_path).convert("RGB")
+                    default_images.append((img, filename))
+                except Exception as e:
+                    print(f"Could not load {img_path}: {e}")
+    
+    return default_images
 
 
 st.set_page_config(page_title="Brain Tumor Image Segmentation", 
