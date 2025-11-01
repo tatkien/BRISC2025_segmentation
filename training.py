@@ -123,13 +123,6 @@ def train():
 
     # Save the trained model
     torch.save(model.state_dict(), "swin_hafnet_model.pth")
-#--------------Handmade training loop----------------#
-
-
-
-# from utils import evaluate, validate
-# from tqdm import tqdm
-
 
 #--------------Main----------------#
 if __name__ == "__main__":

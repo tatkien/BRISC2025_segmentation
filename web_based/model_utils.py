@@ -13,11 +13,10 @@ from PIL import Image
 import segmentation_models_pytorch as smp
 from models.swin_hafnet.swin_hafnet import SwinHAFNet
 
-# Simple preprocessing: resize to 512, convert to tensor and normalize
+# Simple preprocessing: resize to 512, convert to tensor
 transform = T.Compose([
     T.Resize((512, 512)),
     T.ToTensor(),
-    # T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
 

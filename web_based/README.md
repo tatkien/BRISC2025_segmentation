@@ -38,7 +38,7 @@ The app will open in your browser at `http://localhost:8501`
 
 1. **Select Model**: Choose between UNet or SwinHAFNet in the sidebar
 2. **Select Device**: Choose CPU or CUDA (if available)
-3. **Upload Images**: Click "Browse files" to upload 1-5 images
+3. **Upload Images**: Click "Browse files" to upload 1-5 images. Or check the "Load 3 sample images" box to use 3 sample images.
 4. **Adjust Threshold**: Use the slider to change mask threshold (default: 0.5)
 5. **Run Inference**: Click "Run inference" button
 6. **View Results**: Segmentation masks appear with red overlay on tumors
@@ -59,14 +59,14 @@ The app will open in your browser at `http://localhost:8501`
 
 ## Technical Details
 
-- **Preprocessing**: Images resized to 512×512, normalized with ImageNet stats
+- **Preprocessing**: Images resized to 512×512
 - **Inference**: Softmax probabilities on 2 classes (background, tumor)
 - **Threshold**: Adjustable threshold for binary mask generation
 - **Output Format**: Red overlay on original image showing detected tumor regions
 
 ## Notes
 
-- Models expect 512×512 input images
+- 512x512 input images is better for models
 - GPU inference recommended for faster processing
 - Checkpoint loading handles multiple state dict formats
 - If no checkpoint found, models use random weights (for testing only)
@@ -79,4 +79,4 @@ The app will open in your browser at `http://localhost:8501`
 
 **Model loading fails**: Verify checkpoint paths and format compatibility
 
-**Low accuracy**: Ensure you're using trained checkpoints, not random weights
+**Low accuracy**: Ensure you're using trained checkpoints, which satisfy SWIN-HAFNet (or U-Net) architecture, not random weights

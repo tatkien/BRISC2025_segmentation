@@ -18,8 +18,6 @@ def dice_loss(logits, targets, threshold=0.5, smooth=1e-6):
     probs = probs[:, 1:2, ...]  # (batch_size, 1, H, W)
     preds = torch.where(probs >= threshold, 1, 0).int()
     targets = targets.int()
-    # Calculate Dice Score using torchmetrics
-    # dice = DiceScore(num_classes=2, average='weighted', input_format='one-hot')(preds, targets)
     # calculate Dice Score
     dice = (2 * (preds * targets) + smooth).sum() / ((preds + targets) + smooth).sum()
     return 1 - dice
@@ -31,10 +29,7 @@ def binary_cross_entropy_loss(logits, targets):
     """
     if isinstance(logits, dict):
       logits = logits['logits']
-    # Convert logits to probabilities using softmax
-    # probs = torch.softmax(logits, dim=1)  # (batch_size, 2, H, W)
     bce_loss = torch.nn.BCEWithLogitsLoss().to(DEVICE)
-    # preds = probs[:, 1:2, :, :].float()  # Extract tumor channel (batch_size, 1, H, W)
     targets = targets.float()
     return bce_loss(logits[:, 1:2, :, :].float(), targets)
 
